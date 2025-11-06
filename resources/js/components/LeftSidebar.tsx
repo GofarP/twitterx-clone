@@ -11,7 +11,18 @@ import {
 
 import { HugeiconsIcon } from '@hugeicons/react';
 import { usePage } from '@inertiajs/react';
+import { LogOut, UserIcon } from 'lucide-react';
 import NavItem from './NavItem';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Button } from './ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+
+} from './ui/dropdown-menu';
 
 interface LeftSidebarProps {
     unreadCount: number;
@@ -136,7 +147,34 @@ const LeftSidebar = ({ unreadCount, clearUnreadCount }: LeftSidebarProps) => {
                         More
                     </NavItem>
                 </nav>
+                <Button className="mt-8 w-full rounded-full bg-blue-500 text-white hover:bg-blue-600">
+                    Post
+                </Button>
             </div>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <button className="mx-auto flex w-full items-center gap-3 rounded-full p-3 transition-colors hover:bg-muted">
+                        <Avatar className="h-10 w-10">
+                            <AvatarImage src="" alt="" />
+                            <AvatarFallback>GP</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 text-left">
+                            <p className="text-sm font-bold">Gofar Putra</p>
+                            <p className="text-xs text-muted-foreground">
+                                @username
+                            </p>
+                        </div>
+                    </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem>
+                        <UserIcon className="mr-2 h-4 w-4" />
+                        <span>Profile</span>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
         </aside>
     );
 };
+
+export default LeftSidebar;
