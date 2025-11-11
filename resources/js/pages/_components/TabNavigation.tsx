@@ -1,4 +1,4 @@
-import { on } from "events";
+import {cn} from "@/lib/utils"
 import { TabType } from "./types";
 
 interface TabNavigationProps{
@@ -7,9 +7,35 @@ interface TabNavigationProps{
 }
 
 const TabNavigation=({activeTab, onTabChange}:TabNavigationProps)=>{
-    return(
-        <div>TabNavigation</div>
-    )
+    const tabs: Array<{value:TabType; label:string}>=[
+        {
+            value:"for-you", label:"For You"
+        },
+        {
+            value:"following", label:"Following"
+        },
+    ]
+    return <div className="flex border-b">
+        {
+            tabs.map((tab)=>(
+                <button
+                    key={tab.value}
+                    onClick={()=>onTabChange(tab.value)}
+                    className="relative flex-1 py-4 text-center font-semibold transition-colors hover:bg-muted"
+                >
+                    <span className={cn(activeTab=== tab.value ? "text-foreground" : "text-muted-foreground")}>
+                        {tab.label}
+                    </span>
+
+                    {activeTab === tab.value && (
+                        <div className="absolute bottom-0 left-1/2 h-1 w-16 -translate-x-1/2 rounded-full bg-primary"/>
+                    )}
+
+                </button>
+            ))
+        }
+
+    </div>
 }
 
 export default TabNavigation
